@@ -87,7 +87,7 @@ public class Planet {
 
     public void draw() {
         String imgPath = "./images/" + this.imgFileName;
-        StdDraw.clear();
+        //StdDraw.clear();
         StdDraw.picture(this.xxPos, this.yyPos, imgPath);
     }
 }

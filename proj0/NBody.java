@@ -30,24 +30,18 @@ public class NBody {
         double radius = readRadius(filename);
         Planet[] planets = readPlanets(filename);
 
-        StdDraw.enableDoubleBuffering();
+        //StdDraw.enableDoubleBuffering();
         StdDraw.setScale(-radius, radius);
         StdDraw.clear();
-        StdOut.printf("%d\n", planets.length);
-        StdOut.printf("%.2e\n", radius);
+
+        StdDraw.picture(0, 0, "./images/starfield.jpg");
+
         for (int i = 0; i < planets.length; i++) {
-            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-                    planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
-                    planets[i].yyVel, planets[i].mass, planets[i].imgFileName);
+            planets[i].draw();
         }
-        /*StdDraw.picture(0, 0, "./images/starfield.jpg");
+        StdDraw.show();
 
-        for (Planet p : planets) {
-            p.draw();
-        }
-        StdDraw.show();*/
-
-        /*double t = 0;
+        double t = 0;
         while (t < T) {
             double[] xForces = new double[planets.length];
             double[] yForces = new double[planets.length];
@@ -68,7 +62,16 @@ public class NBody {
             StdDraw.show();
             StdDraw.pause(10);
             t += dt;
-        }*/
+        }
+
+        //Printing the Universe
+        StdOut.printf("%d\n", planets.length);
+        StdOut.printf("%.2e\n", radius);
+        for (int i = 0; i < planets.length; i++) {
+            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+                    planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
+                    planets[i].yyVel, planets[i].mass, planets[i].imgFileName);
+        }
 
     }
 
