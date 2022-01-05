@@ -9,3 +9,8 @@ public class HorribleSteve {
         System.out.println("i is " + i);
     }
 }
+/** int a ~ [-128, 127] : repeat the address
+ *  for a >= 128, different addresses
+ *  thus, use ".isequal()" to compare the value
+ *  instead of "==" to compare the address
+ */
