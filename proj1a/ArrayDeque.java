@@ -11,32 +11,39 @@ public class ArrayDeque<T> {
         nextLast = 5;
     }
 
-    private T[] addSize() {
+    private T[] addHelper() {
         T[] result = (T[]) new Object[size + 1];
-        System.arraycopy(items, nextFirst + 1, result, nextFirst + 1, size - nextFirst);
-        return result;
-    }
-
-    public T[] reduceSize() {
-        T[] result = (T[]) new Object[items.length / 2];
-        System.arraycopy(items, 0, result, 0, size);
+        System.arraycopy(items, 0, result, 0, nextLast);
+        System.arraycopy(items, nextLast, result, nextLast + 1, size - nextLast);
         return result;
     }
 
     public void addFirst(T item) {
         if (size == items.length) {
-            items = addSize();
+            items = addHelper();
+            nextFirst += 1;
         }
-
+        items[nextFirst] = item;
+        size += 1;
+        if (nextFirst == 0) {
+            nextFirst = items.length - 1;
+        } else {
+            nextFirst -= 1;
+        }
     }
 
     public void addLast(T item) {
         if (size == items.length) {
-            items = addSize();
+            items = addHelper();
+            nextFirst += 1;
         }
-        items[size + 1] = item;
+        items[nextLast] = item;
         size += 1;
-        nextLast += 1;
+        if (nextLast == items.length - 1) {
+            nextLast = 0;
+        } else {
+            nextLast += 1;
+        }
     }
 
     public boolean isEmpty() {
@@ -48,25 +55,67 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(items[i] + " ");
+        if (nextLast > nextFirst + 1) {
+            for (int i = nextFirst + 1; i < nextLast; i++) {
+                System.out.print(items[i] + " ");
+            }
+        } else if (size == 0) {
+            System.out.print("");
+        } else {
+            for (int i = nextFirst + 1; i < items.length; i++) {
+                System.out.print(items[i] + " ");
+            }
+            for (int j = 0; j < nextLast; j++) {
+                System.out.print(items[j] + " ");
+            }
         }
+        System.out.println("");
+    }
+
+    public T[] reduceSize() {
+        int newLength = items.length / 2;
+        T[] result = (T[]) new Object[newLength];
+        if (nextFirst < nextLast) {
+            System.arraycopy(items, nextFirst + 1, result, 1, size);
+        } else {
+            System.arraycopy(items, nextFirst + 1, result, 1, items.length - nextFirst);
+            System.arraycopy(items, 0, result, 1 + items.length - nextFirst, nextLast);
+        }
+        nextFirst = 0;
+        nextLast = size + 1;
+        return result;
     }
 
     public T removeFirst() {
-        T result = items[0];
-
         size -= 1;
-        if (items.length >= 16 && size / items.length < 0.25) {
+        T result = null;
+        if (nextFirst == items.length - 1) {
+            result = items[0];
+            nextFirst = 0;
+        } else {
+            result = items[nextFirst + 1];
+            nextFirst += 1;
+        }
+
+        float ratio = (float) size / items.length;
+        if (items.length >=16 && ratio < 0.25) {
             items = reduceSize();
         }
         return result;
     }
 
     public T removeLast() {
-        T result = items[size - 1];
         size -= 1;
-        if (items.length >= 16 && size / items.length < 0.25) {
+        T result = null;
+        if (nextLast != 0) {
+            result = items[nextLast - 1];
+            nextLast -= 1;
+        } else {
+            result = items[items.length - 1];
+            nextLast = items.length - 1;
+        }
+        float ratio = (float) size / items.length;
+        if (items.length >=16 && ratio < 0.25) {
             items = reduceSize();
         }
         return result;
@@ -74,5 +123,26 @@ public class ArrayDeque<T> {
 
     public T get(int index) {
         return items[index];
+    }
+
+    public static void main(String[] args) {
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
+
+        for (int j = 0; j < 6; j++){
+            ad.addFirst(j + 10);
+        }
+        for (int i = 0; i < 10; i++){
+            ad.addLast(i);
+        }
+        for (int j = 0; j < 6; j++){
+            ad.addFirst(j + 10);
+        }
+        ad.addLast(88);
+        for (int k = 0; k < 20; k++) {
+            ad.removeFirst();
+        }
+
+
+
     }
 }
