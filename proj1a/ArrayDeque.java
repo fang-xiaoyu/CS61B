@@ -1,8 +1,8 @@
 public class ArrayDeque<T> {
-    public T[] items;
-    public int size;
-    public int nextFirst;
-    public int nextLast;
+    private T[] items;
+    private int size;
+    private int nextFirst;
+    private int nextLast;
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
@@ -72,7 +72,7 @@ public class ArrayDeque<T> {
         System.out.println("");
     }
 
-    public T[] reduceSize() {
+    private T[] reduceSize() {
         int newLength = items.length / 2;
         T[] result = (T[]) new Object[newLength];
         if (nextFirst < nextLast) {

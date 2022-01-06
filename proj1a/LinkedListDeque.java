@@ -4,17 +4,17 @@ public class LinkedListDeque<T> {
         public T item;
         public StaffNode next;
 
-        public StaffNode(StaffNode p, T x, StaffNode n) {
+        private StaffNode(StaffNode p, T x, StaffNode n) {
             prev = p;
             item = x;
             next = n;
         }
     }
 
-    public StaffNode first;
-    public StaffNode last;
-    public StaffNode sentinel;
-    public int size;
+    private StaffNode first;
+    private StaffNode last;
+    private StaffNode sentinel;
+    private int size;
 
     public LinkedListDeque() {
         sentinel = new StaffNode(null, null, null);
@@ -106,7 +106,7 @@ public class LinkedListDeque<T> {
         }
         return temp.item;
     }
-
+/**
     public LinkedListDeque(LinkedListDeque D) {
         this();
         for (int i = 0; i < D.size; i++) {
@@ -114,7 +114,7 @@ public class LinkedListDeque<T> {
             addLast(item);
         }
     }
-
+*/
     public T getRecursive(int index) {
         if (index == 0) {
             return first.item;
@@ -124,11 +124,4 @@ public class LinkedListDeque<T> {
         return (T) temp.getRecursive(index-1);
     }
 
-    public static void main(String[] args) {
-        LinkedListDeque<Integer> D = new LinkedListDeque<>();
-        D.addLast(5);
-        D.addLast(10);
-        D.addLast(15);
-        System.out.print(D.getRecursive(3));
-    }
 }
