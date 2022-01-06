@@ -121,10 +121,6 @@ public class ArrayDeque<T> {
         return result;
     }
 
-    public T get(int index) {
-        return items[index];
-    }
-
     public static void main(String[] args) {
         ArrayDeque<Integer> ad = new ArrayDeque<>();
 
@@ -141,8 +137,20 @@ public class ArrayDeque<T> {
         for (int k = 0; k < 20; k++) {
             ad.removeFirst();
         }
-
-
-
     }
+
+    public T get(int index) {
+        if (nextFirst < nextLast && index < size) {
+            return items[nextFirst + index + 1];
+        } else if (nextFirst >= nextLast && index < size) {
+            if (index <= items.length - nextFirst - 2) {
+                return items[nextFirst + 1 + index];
+            } else {
+                return items[items.length - nextFirst -1];
+            }
+        } else {
+            return null;
+        }
+    }
+    
 }

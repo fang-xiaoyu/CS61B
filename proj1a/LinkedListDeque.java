@@ -106,7 +106,7 @@ public class LinkedListDeque<T> {
         }
         return temp.item;
     }
-/**
+
     public LinkedListDeque(LinkedListDeque D) {
         this();
         for (int i = 0; i < D.size; i++) {
@@ -114,7 +114,7 @@ public class LinkedListDeque<T> {
             addLast(item);
         }
     }
-*/
+
     public T getRecursive(int index) {
         if (index == 0) {
             return first.item;
