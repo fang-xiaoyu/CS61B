@@ -67,7 +67,7 @@ public class LinkedListDeque<T> {
         }
         System.out.print(temp.item);
     }
-
+    /**
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -95,7 +95,38 @@ public class LinkedListDeque<T> {
         size -= 1;
         return temp.item;
     }
+    */
+    public T removeFirst() {
+        if(size==0){
+            return null;
+        }
+        T res = first.item;
+        sentinel.next = first.next;
+        first.next.prev = sentinel;
+        first = first.next;
+        if(first == sentinel) {
+            last = sentinel;
+        }
+        size-=1;
+        return res;
+    }
 
+    public T removeLast() {
+        if(size==0){
+            return null;
+        }
+        T res = last.item;
+        last.prev.next = last.next;
+        last.next.prev = last.prev;
+        last = last.prev;
+        if(last == sentinel) {
+            first = sentinel;
+        }
+        size-=1;
+        return res;
+    }
+    
+    /**
     public T get(int index) {
         if (size < index) {
             return null;
@@ -123,5 +154,34 @@ public class LinkedListDeque<T> {
         temp.removeFirst();
         return (T) temp.getRecursive(index-1);
     }
+     */
+    public T get(int index) {
+        if(index<0 || index>=size) {
+            return null;
+        }else if(index==0) {
+            return first.item;
+        }else if(index==size-1) {
+            return last.item;
+        }
+        StaffNode p=first;
+        for(int i=0; i<index; i+=1) {
+            p=p.next;
+        }
+        T res=p.item;
+        return res;
+    }
 
+    public T getRecursive(int index) {
+        if(index<0 || index>=size) {
+            return null;
+        }
+        return getRecursiveHelper(index, first);
+    }
+
+    private T getRecursiveHelper(int index, StaffNode n){
+        if(index==0){
+            return n.item;
+        }
+        return getRecursiveHelper(index-1, n.next);
+    }
 }
