@@ -125,7 +125,7 @@ public class LinkedListDeque<T> {
         size-=1;
         return res;
     }
-    
+
     /**
     public T get(int index) {
         if (size < index) {
