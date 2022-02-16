@@ -35,6 +35,16 @@ public class Dada {
         }
         int[] r = new int[c];
         System.arraycopy(xclean, 0, r, 0, c);
+
+
+        int[] l = new int[] {1, 2, 3};
+        int[] ll = {1, 2, 3};
+        int[] lll = new int[3];
+        lll[0] = 1;
+        lll[1] = 2;
+        lll[2] = 3;
+
+
         return r;
     }
 
