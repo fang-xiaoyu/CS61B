@@ -79,8 +79,9 @@ public class Percolation {
     public boolean percolates() {
         return uf.connected(top, bottom);
     }
-/**
+
     public static void main(String[] args) {
+        /**
         Percolation p = new Percolation(5);
         p.open(2, 1);
         p.open(3, 2);
@@ -96,5 +97,6 @@ public class Percolation {
         System.out.println(p.isFull(3, 3)); // true
         p.open(4, 3);
         System.out.println(p.percolates()); // true
-    }*/
+         */
+    }
 }
