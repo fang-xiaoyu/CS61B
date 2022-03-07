@@ -91,6 +91,7 @@ public class MazeAStarPath extends MazeExplorer{
                 return;
             }
         }
+        
     }
 
     @Override
