@@ -75,7 +75,7 @@ public class Maze implements Observer {
 
     /**
      * Returns y coordinate for given vertex.
-     * For example if N = 10, and V = 12, returns 1.
+     * For example if N = 10, and V = 12, returns 2.
      */
     public int toY(int v) {
         return v / N + 1;
