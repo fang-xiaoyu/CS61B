@@ -9,7 +9,7 @@ public class EightPuzzleSolver {
      * your basic functionality.
     **********************************************************************/
     public static void main(String[] args) {
-        In in = new In("input/puzzle3x3-07.txt");
+        In in = new In("input/puzzle2x2-00.txt");
         int N = in.readInt();
         int[][] tiles = new int[N][N];
         for (int i = 0; i < N; i++) {
@@ -18,6 +18,7 @@ public class EightPuzzleSolver {
             }
         }
         Board initial = new Board(tiles);
+        int r = initial.manhattan();
         Solver solver = new Solver(initial);
         StdOut.println("Minimum number of moves = " + solver.moves());
         for (WorldState ws : solver.solution()) {
