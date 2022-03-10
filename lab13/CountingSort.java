@@ -1,3 +1,9 @@
+import javafx.scene.layout.Priority;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Class with 2 ways of doing Counting sort, one naive way and one "better" way
  *
@@ -67,6 +73,34 @@ public class CountingSort {
      */
     public static int[] betterCountingSort(int[] arr) {
         // TODO make counting sort work with arrays containing negative numbers.
-        return null;
+        int max = Integer.MIN_VALUE;
+        for (int i : arr) {
+            max = max > Math.abs(i) ? max : Math.abs(i);
+        }
+
+        int[] pos = new int[max + 1];
+        int[] neg = new int[max + 1];
+
+        for (int el: arr) {
+            if (el >= 0) {
+                pos[el]++;
+            } else {
+                neg[-el]++;
+            }
+        }
+
+        int[] result = new int[arr.length];
+        int k = 0;
+        for (int i = neg.length - 1; i >= 0; i--) {
+            for (int j = 0; j < neg[i]; j++, k++) {
+                result[k] = -i;
+            }
+        }
+        for (int i = 0; i < pos.length; i++) {
+            for (int j = 0; j < pos[i];j++, k++) {
+                result[k] = i;
+            }
+        }
+        return result;
     }
 }

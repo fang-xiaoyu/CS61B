@@ -1,3 +1,5 @@
+import java.nio.charset.StandardCharsets;
+
 /**
  * Class for doing Radix sort
  *
@@ -17,7 +19,35 @@ public class RadixSort {
      */
     public static String[] sort(String[] asciis) {
         // TODO: Implement LSD Sort
-        return null;
+        // 1. 求解输入的最长字符串长度
+        int maxLength = Integer.MIN_VALUE; // max length
+        for (String s: asciis) {
+            maxLength = maxLength > s.length() ? maxLength: s.length();
+        }
+
+        int N = asciis.length;
+        int R = 256;
+        String[] aux = new String[N];
+
+        for (int d = maxLength; d >= 0; d--) {
+            int[] count = new int[R+1];
+            for (int i = 0; i < N; i++) {
+                count[asciis[i].charAt(d) + 1] += 1;
+            }
+
+            for (int r = 0; r < R; r++) {
+                count[r+1] += count[r];
+            }
+
+            for (int i = 0; i < N; i++) {
+                aux[count[asciis[i].charAt(d)]++] = asciis[i];
+            }
+
+            for (int i = 0; i < N; i++) {
+                asciis[i] = aux[i];
+            }
+        }
+        return asciis;
     }
 
     /**
@@ -44,5 +74,13 @@ public class RadixSort {
     private static void sortHelperMSD(String[] asciis, int start, int end, int index) {
         // Optional MSD helper method for optional MSD radix sort
         return;
+    }
+
+    public static void main(String[] args) {
+        String[] s1 = new String[20];
+        for (int i = 0; i < 20; i++) {
+            s1[i] = Integer.toString(i);
+        }
+        String[] s2 = sort(s1);
     }
 }
