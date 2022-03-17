@@ -1,4 +1,5 @@
 import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * Class for doing Radix sort
@@ -77,10 +78,19 @@ public class RadixSort {
     }
 
     public static void main(String[] args) {
-        String[] s1 = new String[20];
-        for (int i = 0; i < 20; i++) {
-            s1[i] = Integer.toString(i);
-        }
-        String[] s2 = sort(s1);
+
+
+        Map<Character, Integer> map = new HashMap<>();
+        String s = "ssss";
+        s.toCharArray();
+        int[] a = {1};
+        int[] b = {2};
+        List<Integer> l  =new ArrayList();
+
+        PriorityQueue<Integer> pq  =new PriorityQueue<>();
+        pq.offer(2);
+        pq.offer(1);
+        int i = pq.poll();
+
     }
 }
